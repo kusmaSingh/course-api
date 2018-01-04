@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.javabrains.springbootstarter.dto.ResponseDTO;
+
 
 
 /**
@@ -32,9 +34,9 @@ public class TopicController {
 	}
 
 	@RequestMapping(value = "/topics", method = RequestMethod.POST)
-	public String addTopic(@RequestBody Topic topic) {
-		topicService.addTopic(topic);
-		return "add done";
+	public ResponseDTO addTopic(@RequestBody Topic topic) {
+		//topicService.addTopic(topic);
+		return topicService.addTopic(topic);
 	}
 
 	@RequestMapping(value = "/topics/{id}", method = RequestMethod.POST)

@@ -8,12 +8,14 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 
 /**
  * @author Kusma
@@ -24,18 +26,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class CourseController {
 	public static final Logger logger = LoggerFactory.getLogger(CourseController.class);
 
-	
 	@Autowired
 	private CourseService courseService;
-	
+
 	@RequestMapping("/topics/courses")
-	public List<Course> getAllCourses(){
+	public ResponseEntity<List<Course>> getAllCourses(Model model) {
+		List<Course> course = courseService.getAllCourses();
 		logger.info("get all course ");
-		return courseService.getAllCourses();
-		
+		return new ResponseEntity<List<Course>>(course, HttpStatus.OK);
+
 	}
-	
-	
+
 	@RequestMapping("/topics/{id}/course")
 	public List<Course> getAllCourseByTopicId(@PathVariable String id) {
 		logger.info("get all course ");
@@ -56,12 +57,13 @@ public class CourseController {
 		return "done";
 	}
 
-/*	@RequestMapping(value = "/topics/{topicId}/course/{id}", method = RequestMethod.POST)
-	public String updateCourse(@RequestBody Course course, @PathVariable String topicId, @PathVariable String id) {
-		course.setTopic(new Topic(topicId, "", ""));
-		courseService.updateCourse(course, id);
-		return "update done";
-	}*/
+	/*
+	 * @RequestMapping(value = "/topics/{topicId}/course/{id}", method =
+	 * RequestMethod.POST) public String updateCourse(@RequestBody Course
+	 * course, @PathVariable String topicId, @PathVariable String id) {
+	 * course.setTopic(new Topic(topicId, "", ""));
+	 * courseService.updateCourse(course, id); return "update done"; }
+	 */
 
 	@RequestMapping(value = "/topics/{topicId}/course/{id}", method = RequestMethod.DELETE)
 	public String deleteCourse(@PathVariable String id) {

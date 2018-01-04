@@ -8,7 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import io.javabrains.springbootstarter.dto.CustomStatusCode;
+import io.javabrains.springbootstarter.dto.ResponseDTO;
 
 /**
  * @author Kusma
@@ -36,9 +40,12 @@ public class TopicService {
 	public Topic getTopic(String id){
 		return topicRepository.findOne(id);
 	}
-	public void addTopic(Topic topic){
-		System.out.println("------+++++----"+topic);
+	public ResponseDTO addTopic(Topic topic){
+		//System.out.println("------+++++----"+topic);
 		topicRepository.save(topic);
+		ResponseDTO responseDTO = new ResponseDTO(HttpStatus.OK,  CustomStatusCode.customStatuscodes.OK.getStatuscode(),
+				new Topic(topic.getId()), CustomStatusCode.hTTPStatusMessage.SUCCESS.getValue());
+		return responseDTO;
 	}
 	public void updateTopic( Topic topic, String id){
 	/*	for(int i=0 ; i<topics.size(); i++){

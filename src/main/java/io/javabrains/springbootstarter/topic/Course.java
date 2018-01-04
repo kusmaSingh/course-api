@@ -44,14 +44,22 @@ public class Course {
 	 * @param name
 	 * @param description
 	 */
-	public Course(String id, String name, String description, String topicId) {
+	public Course(String id, String name, String description, String topicid) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.topic = new Topic(topicId, "","");
+		this.topic = new Topic(topicid, "","");
 	}
-
+	public Course(String id, String name, String description, Topic topic) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.topic = topic;
+	}
+	
+	
 	/*
 	 * Getter and Setter
 	 */ 

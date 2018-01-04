@@ -37,6 +37,17 @@ public class Topic {
 		this.name = name;
 		this.description = description;
 	}
+	/**
+	 * Parameterized Constructor
+	 * @param id
+	 * @param name
+	 * @param description
+	 */
+	public Topic(String id) {
+		super();
+		this.id = id;
+		
+	}
 
 	/*
 	 * Getter and Setter
