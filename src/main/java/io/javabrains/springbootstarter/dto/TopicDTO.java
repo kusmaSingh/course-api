@@ -3,36 +3,49 @@
  */
 package io.javabrains.springbootstarter.dto;
 
-import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * @author Kusma
  *
- * 28-Dec-2017
+ *         28-Dec-2017
  */
-public class TopicDTO {
-	
-	private String id;
-	
+
+public class TopicDTO implements Serializable {
+
+	private Long id;
+	private String stream;
 	private String name;
 	private String description;
 
-	/*@OneToMany(mappedBy="topic",cascade=CascadeType.ALL)
-	List<Course> courses;*/
+	private static final long serialVersionUID = 2517561974281512788L;
+
 	/*
-	 *Default Contructor
+	 * Default Contructor
 	 */
-	public TopicDTO() {	
+	public TopicDTO() {
 	}
-	
-	
+
+	public TopicDTO(Long id) {
+		this.id = id;
+	}
+
+	public TopicDTO(Long id, String stream, String name, String description) {
+		super();
+		this.id = id;
+		this.stream = stream;
+		this.name = name;
+		this.description = description;
+	}
+
 	/**
 	 * Parameterized Constructor
+	 * 
 	 * @param id
 	 * @param name
 	 * @param description
 	 */
-	public TopicDTO(String id, String name, String description) {
+	public TopicDTO(Long id, String name, String description) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -41,12 +54,12 @@ public class TopicDTO {
 
 	/*
 	 * Getter and Setter
-	 */ 
-	public String getId() {
+	 */
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -66,15 +79,19 @@ public class TopicDTO {
 		this.description = description;
 	}
 
-/*
-	public List<Course> getCourses() {
-		return courses;
+	/**
+	 * @return the stream
+	 */
+	public String getStream() {
+		return stream;
 	}
 
-
-	public void setCourses(List<Course> courses) {
-		this.courses = courses;
-	}*/
-
+	/**
+	 * @param stream
+	 *            the stream to set
+	 */
+	public void setStream(String stream) {
+		this.stream = stream;
+	}
 
 }

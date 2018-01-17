@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.javabrains.springbootstarter.dto.ResponseDTO;
+import io.javabrains.springbootstarter.dto.TopicDTO;
 
 
 
@@ -23,13 +24,14 @@ public class TopicController {
 
 	@Autowired
 	private TopicService topicService;
+	
 	@RequestMapping("/topics")
 	public List<Topic> getAllTopic() {
 		return topicService.getAllTopics();
 	}
 
 	@RequestMapping("/topics/{id}")
-	public Topic getTopicByid(@PathVariable String id) {
+	public Topic getTopicByid(@PathVariable Long id) {
 		return topicService.getTopic(id);
 	}
 
@@ -40,13 +42,13 @@ public class TopicController {
 	}
 
 	@RequestMapping(value = "/topics/{id}", method = RequestMethod.POST)
-	public String updateTopic(@RequestBody Topic topic, @PathVariable String id) {
+	public String updateTopic(@RequestBody Topic topic, @PathVariable Long id) {
 		topicService.updateTopic(topic, id);
 		return "done";
 	}
 
 	@RequestMapping(value = "/topics/remove/{id}", method = RequestMethod.DELETE)
-	public String deleteTopic(@PathVariable String id) {
+	public String deleteTopic(@PathVariable Long id) {
 		topicService.deleteTopic(id);
 		return "remove";
 	}

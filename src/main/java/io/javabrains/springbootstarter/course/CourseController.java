@@ -1,7 +1,7 @@
 /**
  * 
  */
-package io.javabrains.springbootstarter.topic;
+package io.javabrains.springbootstarter.course;
 
 import java.util.List;
 
@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.javabrains.springbootstarter.dto.CourseDTO;
+import io.javabrains.springbootstarter.topic.Topic;
+import io.javabrains.springbootstarter.topic.TopicService;
+
 /**
  * @author Kusma
  *
@@ -28,31 +32,36 @@ public class CourseController {
 
 	@Autowired
 	private CourseService courseService;
+	
+	@Autowired
+	private TopicService topicService;
 
 	@RequestMapping("/topics/courses")
-	public ResponseEntity<List<Course>> getAllCourses(Model model) {
-		List<Course> course = courseService.getAllCourses();
-		logger.info("get all course ");
-		return new ResponseEntity<List<Course>>(course, HttpStatus.OK);
+	public List<Course> getAllCourses(Model model) {
+		return courseService.getAllCourses();
+		
 
 	}
 
 	@RequestMapping("/topics/{id}/course")
-	public List<Course> getAllCourseByTopicId(@PathVariable String id) {
+	public List<Course> getAllCourseByTopicId(@PathVariable Long id) {
 		logger.info("get all course ");
 		return courseService.getAllCourseByTopicId(id);
 	}
 
 	@RequestMapping("/topics/{topicId}/course/{id}")
-	public Course getCourse(@PathVariable String id) {
+	public Course getCourse(@PathVariable Long id) {
 		logger.info("get all course via topic id ");
 		return courseService.getCourse(id);
 	}
 
-	@RequestMapping(value = "/topics/{topicId}/course/{id}", method = RequestMethod.POST)
-	public String addCourse(@RequestBody Course course, @PathVariable String topicId) {
+	
+	
+	@RequestMapping(value = "/topics/course/{id}/{topicId}", method = RequestMethod.POST)
+	public String addCourse(@RequestBody Course course, @PathVariable("id") Long id,@PathVariable("topicId") Long topicId) {
 		logger.info("add new Course ");
-		course.setTopic(new Topic(topicId, "", ""));
+		Topic topic = topicService.getTopic(topicId); 
+		course.setTopic(topic);
 		courseService.addCourse(course);
 		return "done";
 	}
@@ -66,7 +75,7 @@ public class CourseController {
 	 */
 
 	@RequestMapping(value = "/topics/{topicId}/course/{id}", method = RequestMethod.DELETE)
-	public String deleteCourse(@PathVariable String id) {
+	public String deleteCourse(@PathVariable Long id) {
 		logger.info("delete Course");
 		courseService.deleteCourse(id);
 		return "remove";
