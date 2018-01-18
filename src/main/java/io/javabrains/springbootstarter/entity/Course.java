@@ -1,19 +1,51 @@
-package io.javabrains.springbootstarter.topic;
+/**
+ * 
+ */
+package io.javabrains.springbootstarter.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+/**
+ * @author Kusma
+ *
+ */
 @Entity
-public class Topic {
+public class Course {
+	
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+
 	private String stream;
+
 	private String name;
+
 	private String description;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Topic topic;
+
+	public Topic getTopic() {
+		return topic;
+	}
+
+	public void setTopic(Topic topic) {
+		this.topic = topic;
+	}
+
+	/*
+	 * Default Contructor
+	 */
+	public Course() {
+	}
 
 	/**
 	 * @return the id
@@ -74,29 +106,20 @@ public class Topic {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	/*
-	 * Default Contructor
-	 */
-	public Topic() {
-
-	}
-
-	public Topic(Long id) {
-
-	}
-
-	public Topic(Long id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
-	}
-
-	public Topic(Long id, String stream, String name, String description) {
+	
+	public Course(Long id, String stream, String name, String description, Topic topic) {
 		this.id = id;
 		this.stream = stream;
 		this.name = name;
 		this.description = description;
+		this.topic = topic;
 	}
-
+	public Course(Long id, String stream, String name, String description, Long topicId) {
+		super();
+		this.id = id;
+		this.stream = stream;
+		this.name = name;
+		this.description = description;
+		this.topic = new Topic(topicId);
+	}
 }

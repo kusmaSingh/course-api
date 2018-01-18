@@ -1,7 +1,7 @@
 /**
  * 
  */
-package io.javabrains.springbootstarter.user;
+package io.javabrains.springbootstarter.dto;
 
 import java.util.Set;
 
@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
+import io.javabrains.springbootstarter.entity.Roles;
 
 /**
  * @author Kusma

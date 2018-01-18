@@ -1,7 +1,7 @@
 /**
  * 
  */
-package io.javabrains.springbootstarter.user;
+package io.javabrains.springbootstarter.entity;
 
 import java.util.Set;
 

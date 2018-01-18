@@ -1,7 +1,7 @@
 /**
  * 
  */
-package io.javabrains.springbootstarter.topic;
+package io.javabrains.springbootstarter.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import io.javabrains.springbootstarter.dto.CustomStatusCode;
 import io.javabrains.springbootstarter.dto.ResponseDTO;
 import io.javabrains.springbootstarter.dto.TopicDTO;
+import io.javabrains.springbootstarter.entity.Topic;
+import io.javabrains.springbootstarter.repository.TopicRepository;
 
 /**
  * @author Kusma

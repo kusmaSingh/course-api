@@ -1,13 +1,18 @@
 /**
  * 
  */
-package io.javabrains.springbootstarter.user;
+package io.javabrains.springbootstarter.serviceImpl;
 
 import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import io.javabrains.springbootstarter.entity.User;
+import io.javabrains.springbootstarter.repository.RolesRepository;
+import io.javabrains.springbootstarter.repository.UserRepository;
+import io.javabrains.springbootstarter.service.UserService;
 
 
 

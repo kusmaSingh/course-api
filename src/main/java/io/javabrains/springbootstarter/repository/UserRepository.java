@@ -1,10 +1,12 @@
 /**
  * 
  */
-package io.javabrains.springbootstarter.user;
+package io.javabrains.springbootstarter.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import io.javabrains.springbootstarter.entity.User;
 
 /**
  * @author Kusma

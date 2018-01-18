@@ -1,8 +1,9 @@
 /**
  * 
  */
-package io.javabrains.springbootstarter.user;
+package io.javabrains.springbootstarter.service;
 
+import io.javabrains.springbootstarter.entity.User;
 
 /**
  * @author Kusma

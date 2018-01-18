@@ -1,7 +1,7 @@
 /**
  * 
  */
-package io.javabrains.springbootstarter.course;
+package io.javabrains.springbootstarter.controller;
 
 import java.util.List;
 
@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.javabrains.springbootstarter.dto.CourseDTO;
-import io.javabrains.springbootstarter.topic.Topic;
-import io.javabrains.springbootstarter.topic.TopicService;
+import io.javabrains.springbootstarter.entity.Course;
+import io.javabrains.springbootstarter.entity.Topic;
+import io.javabrains.springbootstarter.serviceImpl.CourseService;
+import io.javabrains.springbootstarter.serviceImpl.TopicService;
 
 /**
  * @author Kusma

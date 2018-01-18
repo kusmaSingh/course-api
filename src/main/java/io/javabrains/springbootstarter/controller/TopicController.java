@@ -1,4 +1,4 @@
-package io.javabrains.springbootstarter.topic;
+package io.javabrains.springbootstarter.controller;
 
 import java.util.List;
 
@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.javabrains.springbootstarter.dto.ResponseDTO;
 import io.javabrains.springbootstarter.dto.TopicDTO;
+import io.javabrains.springbootstarter.entity.Topic;
+import io.javabrains.springbootstarter.serviceImpl.TopicService;
 
 
 

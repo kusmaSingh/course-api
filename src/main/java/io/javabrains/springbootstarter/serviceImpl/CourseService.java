@@ -1,7 +1,7 @@
 /**
  * 
  */
-package io.javabrains.springbootstarter.course;
+package io.javabrains.springbootstarter.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import io.javabrains.springbootstarter.dto.CourseDTO;
 import io.javabrains.springbootstarter.dto.CustomStatusCode;
 import io.javabrains.springbootstarter.dto.ResponseDTO;
+import io.javabrains.springbootstarter.entity.Course;
+import io.javabrains.springbootstarter.repository.CourseRepository;
 
 /**
  * @author Kusma

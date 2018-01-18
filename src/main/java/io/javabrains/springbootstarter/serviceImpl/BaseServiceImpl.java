@@ -1,10 +1,12 @@
 /**
  * 
  */
-package io.javabrains.springbootstarter.topic;
+package io.javabrains.springbootstarter.serviceImpl;
 
 import java.io.Serializable;
 import java.util.List;
+
+import io.javabrains.springbootstarter.repository.BaseRepository;
 
 /**
  * @author Kusma

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package io.javabrains.springbootstarter.user;
+package io.javabrains.springbootstarter.controller;
 
 import javax.ws.rs.POST;
 
@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.javabrains.springbootstarter.dto.CustomStatusCode;
 import io.javabrains.springbootstarter.dto.ResponseDTO;
+import io.javabrains.springbootstarter.dto.UserDTO;
+import io.javabrains.springbootstarter.entity.User;
+import io.javabrains.springbootstarter.repository.UserRepository;
+import io.javabrains.springbootstarter.service.UserService;
 
 /**
  * @author Kusma
@@ -21,6 +25,7 @@ import io.javabrains.springbootstarter.dto.ResponseDTO;
  *         12-Jan-2018
  */
 @RestController
+@RequestMapping("/user")
 public class UserController {
 	@Autowired
 	private UserService userService;
@@ -43,7 +48,7 @@ public class UserController {
 				new UserDTO(user.getUsername(), user.getId()), CustomStatusCode.hTTPStatusMessage.SUCCESS.getValue());
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST )
 	public ResponseDTO login(@RequestBody UserDTO userDto) {
 		User userName = userService.findByUsername(userDto.getUsername());
 		if (null != userName) {
@@ -61,4 +66,10 @@ public class UserController {
 		}
 	}
 
+	
+	@RequestMapping(value = "/testurl", method = RequestMethod.GET )
+	public String login() {
+		System.out.println("Test");
+		return "KUSMA";
+	}
 }

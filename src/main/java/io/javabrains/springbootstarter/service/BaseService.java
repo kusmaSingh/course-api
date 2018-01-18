@@ -1,7 +1,7 @@
 /**
  * 
  */
-package io.javabrains.springbootstarter.topic;
+package io.javabrains.springbootstarter.service;
 
 import java.io.Serializable;
 

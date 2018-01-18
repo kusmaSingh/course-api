@@ -1,7 +1,7 @@
 /**
  * 
  */
-package io.javabrains.springbootstarter.course;
+package io.javabrains.springbootstarter.repository;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import io.javabrains.springbootstarter.dto.CourseDTO;
+import io.javabrains.springbootstarter.entity.Course;
 
 /**
  * @author Kusma
