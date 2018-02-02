@@ -28,7 +28,8 @@ public class CustomStatusCode {
 	}
 
 	public enum hTTPStatusMessage {
-		SUCCESS("SUCCESS"), FAILED("FAILED"), UPDATED("UPDATED"), CREATED("CREATED");
+		SUCCESS("SUCCESS"), FAILED("Opps!! There is somthing went worng"), UPDATED("UPDATED"), CREATED("CREATED"), 
+		INVALID("Invalid username and Password"), CONFLICT("This User Is already exist");
 
 		private String value;
 

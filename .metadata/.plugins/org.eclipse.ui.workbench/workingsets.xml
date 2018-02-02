@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workingSetManager>
+<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1516683302055_1" label="crypex" name="crypex">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/crypex" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/crypex-web" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/crypex-common" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/crypex-dao" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/crypex-service" type="4"/>
+</workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1516596189306_0" label="Window Working Set" name="Aggregate for window 1516596189305"/>
+</workingSetManager>

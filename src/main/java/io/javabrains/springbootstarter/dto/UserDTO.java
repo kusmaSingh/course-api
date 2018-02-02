@@ -21,9 +21,12 @@ import io.javabrains.springbootstarter.entity.Roles;
  */
 public class UserDTO {
 	private Long id;
+	private String firstname;
 	private String username;
 	private String password;
-	private String passwordConfirm;
+	private String lastname;
+	private Long phonenumber;
+
 	private Set<Roles> roles;
 
 	/*Default Constructor*/
@@ -37,25 +40,14 @@ public class UserDTO {
 	 * @param password
 	 * @param passwordConfirm
 	 */
-	public UserDTO(Long id, String username, String password, String passwordConfirm) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.passwordConfirm = passwordConfirm;
-	}
-
-	/**
-	 * @param id
-	 * @param username
-	 * @param password
-	 */
 	public UserDTO(Long id, String username, String password) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 	}
+
+	
 
 	/**
 	 * @param username2
@@ -104,17 +96,29 @@ public class UserDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	/**
-	 * @return the passwordConfirm
-	 */
-	public String getPasswordConfirm() {
-		return passwordConfirm;
+	
+	public String getFirstname() {
+		return firstname;
 	}
-	/**
-	 * @param passwordConfirm the passwordConfirm to set
-	 */
-	public void setPasswordConfirm(String passwordConfirm) {
-		this.passwordConfirm = passwordConfirm;
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public Long getPhonenumber() {
+		return phonenumber;
+	}
+
+	public void setPhonenumber(Long phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 
 	@ManyToMany

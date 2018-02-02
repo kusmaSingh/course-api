@@ -1,0 +1,38 @@
+2018-01-23 10:25:06,790 [Worker-13] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: com.crypex:crypex:0.0.1-SNAPSHOT @ /home/insonix/work/projects/crypex/pom.xml.
+2018-01-23 10:25:11,303 [Worker-13] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.crypex:crypex-web:0.0.1-SNAPSHOT @ /home/insonix/work/projects/crypex/crypex-web/pom.xml.
+2018-01-23 10:25:12,696 [Worker-13] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.crypex:crypex-common:0.0.1-SNAPSHOT @ /home/insonix/work/projects/crypex/crypex-common/pom.xml.
+2018-01-23 10:25:12,939 [Worker-13] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.crypex:crypex-dao:0.0.1-SNAPSHOT @ /home/insonix/work/projects/crypex/crypex-dao/pom.xml.
+2018-01-23 10:25:13,392 [Worker-13] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.crypex:crypex-service:0.0.1-SNAPSHOT @ /home/insonix/work/projects/crypex/crypex-service/pom.xml.
+2018-01-23 10:25:17,110 [Worker-13] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /crypex-common/src/main/java
+2018-01-23 10:25:17,111 [Worker-13] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /crypex-common/src/test/java
+2018-01-23 10:25:17,394 [Worker-13] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /crypex-dao/src/main/java
+2018-01-23 10:25:17,394 [Worker-13] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /crypex-dao/src/test/java
+2018-01-23 10:25:17,524 [Worker-13] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /crypex-service/src/main/java
+2018-01-23 10:25:17,525 [Worker-13] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /crypex-service/src/main/resources
+2018-01-23 10:25:17,525 [Worker-13] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /crypex-service/src/main/resources
+2018-01-23 10:25:17,526 [Worker-13] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /crypex-service/src/test/java
+2018-01-23 10:25:17,674 [Worker-13] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /crypex-web/src/main/java
+2018-01-23 10:25:17,674 [Worker-13] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /crypex-web/src/main/resources
+2018-01-23 10:25:17,681 [Worker-13] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /crypex-web/src/main/resources
+2018-01-23 10:25:17,682 [Worker-13] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /crypex-web/src/test/java
+2018-01-23 10:25:17,807 [Worker-13] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 5 project(s) in 15 sec
+2018-01-23 10:25:25,815 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-01-23 10:25:25,815 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/insonix/work/projects/crypex/crypex-common/src/main/resources
+2018-01-23 10:25:25,816 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/insonix/work/projects/crypex/crypex-common/src/main/resources
+2018-01-23 10:25:25,829 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-01-23 10:25:25,829 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/insonix/work/projects/crypex/crypex-common/src/test/resources
+2018-01-23 10:25:31,245 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-01-23 10:25:31,245 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/insonix/work/projects/crypex/crypex-dao/src/main/resources
+2018-01-23 10:25:31,245 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/insonix/work/projects/crypex/crypex-dao/src/main/resources
+2018-01-23 10:25:31,247 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-01-23 10:25:31,247 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/insonix/work/projects/crypex/crypex-dao/src/test/resources
+2018-01-23 10:25:33,704 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-01-23 10:25:33,707 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-01-23 10:25:33,708 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2018-01-23 10:25:33,852 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-01-23 10:25:33,853 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/insonix/work/projects/crypex/crypex-service/src/test/resources
+2018-01-23 10:25:36,151 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-01-23 10:25:36,152 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 6 resources
+2018-01-23 10:25:36,222 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2018-01-23 10:25:36,248 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-01-23 10:25:36,249 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/insonix/work/projects/crypex/crypex-web/src/test/resources
