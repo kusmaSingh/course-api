@@ -4,11 +4,13 @@
 package io.javabrains.springbootstarter.serviceImpl;
 
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import io.javabrains.springbootstarter.entity.Roles;
 import io.javabrains.springbootstarter.entity.User;
 import io.javabrains.springbootstarter.repository.RolesRepository;
 import io.javabrains.springbootstarter.repository.UserRepository;
@@ -28,15 +30,14 @@ public class UserServiceImpl implements UserService {
 	    private UserRepository userRepository;
 	    @Autowired
 	    private RolesRepository rolesRepository;
-	    @Autowired
-	    private BCryptPasswordEncoder bCryptPasswordEncoder;
+	   
 
 	/* (non-Javadoc)
 	 * @see io.javabrains.springbootstarter.user.UserService#save(io.javabrains.springbootstarter.user.User)
 	 */
 	@Override
 	public void save(User user) {
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		/*user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));*/
 		user.setRoles(new HashSet<>(rolesRepository.findAll()));
 		 userRepository.save(user);
 	}
@@ -56,6 +57,12 @@ public class UserServiceImpl implements UserService {
 	public User LoginUser(User user) {
 		
 		return userRepository.findByUsername(user.getUsername());
+	}
+
+	@Override
+	public List<Roles> findRoleByUserId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

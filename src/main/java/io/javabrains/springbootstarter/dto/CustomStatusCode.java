@@ -45,4 +45,29 @@ public class CustomStatusCode {
 			return value;
 		}
 	}
+	
+	public enum Authentication {
+	    GLOBAL(2),
+	    AUTHENTICATION_SUCCESS(700), 
+	    AUTHENTICATION_FAILED(701), 
+	    BAD_CREDENTIALS(703),
+	    AUTHENTICATION_CREDENTIALS_NOT_PROVIDED(704),
+	    LOGOUT_SUCCESS(705),
+	    AUTH_METHOD_NOT_SUPPORTED(706),
+	    INVALID_JWT_TOKEN(710),
+	    JWT_TOKEN_EXPIRED(711);
+	   
+	    
+	    private int statusCode;
+
+	    private Authentication(int statusCode) {
+	        this.statusCode = statusCode;
+	    }
+
+	    @JsonValue
+	    public int getStatusCode() {
+	        return statusCode;
+	    }
+	}
+
 }

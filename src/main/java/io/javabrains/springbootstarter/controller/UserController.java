@@ -3,12 +3,9 @@
  */
 package io.javabrains.springbootstarter.controller;
 
-import javax.ws.rs.POST;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.javabrains.springbootstarter.dto.CustomStatusCode;
 import io.javabrains.springbootstarter.dto.ResponseDTO;
 import io.javabrains.springbootstarter.dto.UserDTO;
-import io.javabrains.springbootstarter.entity.Roles;
 import io.javabrains.springbootstarter.entity.User;
 import io.javabrains.springbootstarter.repository.UserRepository;
 import io.javabrains.springbootstarter.service.UserService;
@@ -25,7 +21,7 @@ import io.javabrains.springbootstarter.service.UserService;
 /**
  * @author Kusma
  *
- *         12-Jan-2018
+ * @date  12-Jan-2018
  */
 @RestController
 @RequestMapping("/user")
@@ -36,8 +32,8 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+/*	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;*/
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public ResponseDTO registration(@RequestBody User user) {
@@ -56,7 +52,7 @@ public class UserController {
 				new UserDTO(user.getUsername(), user.getId()), CustomStatusCode.hTTPStatusMessage.SUCCESS.getValue());
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseDTO login(@RequestBody UserDTO userDto) {
 		boolean isPasswordMatch = false;
 		User user = userService.findByUsername(userDto.getUsername());
@@ -78,7 +74,7 @@ public class UserController {
 				CustomStatusCode.hTTPStatusMessage.INVALID.getValue());
 
 	}
-
+*/
 	@RequestMapping(value = "/findOne", method = RequestMethod.GET)
 	public String login() {
 		System.out.println("Test");

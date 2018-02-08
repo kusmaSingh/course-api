@@ -3,6 +3,9 @@
  */
 package io.javabrains.springbootstarter.service;
 
+import java.util.List;
+
+import io.javabrains.springbootstarter.entity.Roles;
 import io.javabrains.springbootstarter.entity.User;
 
 /**
@@ -16,6 +19,8 @@ public interface UserService {
 
 	public User findByUsername(String username);
 	public User LoginUser(User user);
-	
+
+	List<Roles> findRoleByUserId(Long id);
+
 
 }
