@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "io.javabrains.springbootstarter" })
+@ComponentScan(basePackages = { "io.javabrains.springbootstarter","io.javabarins.sprinbootstarter.security.jwt.model" })
 public class CourseApiApp {
 
 	public static void main(String[] args) {

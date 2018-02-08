@@ -30,12 +30,13 @@ public class TokenServiceImpl extends BaseServiceImpl<Token, Long> implements To
 	@Autowired
 	private TokenRepository tokenRepository;
 	
-	@Autowired
+/*	@Autowired
 	private HazelcastInstance hazelcastInstance;
-	
+	*/
 	
 	public IMap<Object, Object> getImap() {
-		return hazelcastInstance.getMap("blacklistToken");
+		//return hazelcastInstance.getMap("blacklistToken");
+		return null;
 	}
 
 
