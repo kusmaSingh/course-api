@@ -2,7 +2,6 @@ package io.javabrains.springbootstarter.service;
 
 
 
-import com.hazelcast.core.IMap;
 
 import io.javabrains.springbootstarter.dto.ResponseDTO;
 import io.javabrains.springbootstarter.entity.Token;
@@ -30,10 +29,6 @@ public interface TokenService  extends BaseService <Token, Long>{
 	 */
 	public void tokenVerification();
 
-	/**
-	 * Hazelcast map is used for token blacklist
-	 * @return
-	 */
-	public IMap<Object, Object> getImap();
+	
 }
 

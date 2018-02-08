@@ -32,8 +32,8 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
-/*	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;*/
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public ResponseDTO registration(@RequestBody User user) {
