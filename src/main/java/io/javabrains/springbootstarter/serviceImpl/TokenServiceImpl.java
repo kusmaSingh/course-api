@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hazelcast.core.IMap;
+
 import io.javabrains.springbootstarter.dto.ResponseDTO;
 import io.javabrains.springbootstarter.entity.Token;
 import io.javabrains.springbootstarter.repository.TokenRepository;
@@ -27,14 +29,23 @@ public class TokenServiceImpl extends BaseServiceImpl<Token, Long> implements To
 	@Autowired
 	private TokenRepository tokenRepository;
 	
+
 	/*@Autowired
 	private HazelcastInstance hazelcastInstance;*/
 	
 	
 	/*public IMap<Object, Object> getImap() {
+=======
+/*	@Autowired
+	private HazelcastInstance hazelcastInstance;
+	*/
+	
+	public IMap<Object, Object> getImap() {
+		//return hazelcastInstance.getMap("blacklistToken");
+
 		return null;
 	}
-*/
+
 
 	@Override
 	public ResponseDTO createToken(String email, String contextUrl, String resetUrl) {
