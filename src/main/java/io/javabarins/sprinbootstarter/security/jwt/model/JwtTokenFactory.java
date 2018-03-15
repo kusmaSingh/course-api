@@ -55,7 +55,7 @@ public class JwtTokenFactory {
 				.setExpiration(Date.from(currentTime.plusMinutes(settings.getTokenExpirationTime())
 						.atZone(ZoneId.systemDefault()).toInstant()))
 				.signWith(SignatureAlgorithm.HS512, settings.getTokenSigningKey()).compact();
-
+	
 		return new AccessJwtToken(token, claims);
 	}
 

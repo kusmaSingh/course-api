@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import io.javabrains.springbootstarter.dto.RoleDTO;
+import io.javabrains.springbootstarter.dto.UserDTO;
 import io.javabrains.springbootstarter.entity.Roles;
 import io.javabrains.springbootstarter.entity.User;
 import io.javabrains.springbootstarter.repository.RolesRepository;
@@ -26,19 +28,20 @@ import io.javabrains.springbootstarter.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 	
-	 @Autowired
+		@Autowired
 	    private UserRepository userRepository;
 	    @Autowired
 	    private RolesRepository rolesRepository;
 	   
-
+	    @Autowired
+	    private BCryptPasswordEncoder bCryptPasswordEncoder;
 	/* (non-Javadoc)
 	 * @see io.javabrains.springbootstarter.user.UserService#save(io.javabrains.springbootstarter.user.User)
 	 */
 	@Override
 	public void save(User user) {
-		/*user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));*/
-		user.setRoles(new HashSet<>(rolesRepository.findAll()));
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		//user.setRoles(new HashSet<>(rolesRepository.findAll()));
 		 userRepository.save(user);
 	}
 
@@ -60,9 +63,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<Roles> findRoleByUserId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RoleDTO> findRoleByUserId(Long id) {
+		return  userRepository.findRolesById(id);
+	}
+
+	@Override
+	public UserDTO findOne(String username) {
+		return userRepository.findOne(username);
 	}
 
 }

@@ -14,8 +14,6 @@ import org.springframework.stereotype.Component;
 import io.javabarins.sprinbootstarter.security.jwt.model.RawAccessJwtToken;
 import io.javabarins.sprinbootstarter.security.jwt.model.UserContext;
 import io.javabrains.springbootstarter.config.JwtSetting;
-import io.javabrains.springbootstarter.exception.LogoutException;
-import io.javabrains.springbootstarter.service.TokenService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 

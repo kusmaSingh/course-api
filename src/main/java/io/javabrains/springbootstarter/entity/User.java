@@ -3,16 +3,18 @@
  */
 package io.javabrains.springbootstarter.entity;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 /**
  * @author Kusma
@@ -34,7 +36,7 @@ public class User {
 	private String lastname;
 	private Long phonenumber;
 
-	private Set<Roles> roles;
+	List<UserRole> userRoles = new ArrayList<UserRole>(0);
 
 	/* Default Constructor */
 	public User() {
@@ -54,8 +56,7 @@ public class User {
 		this.password = password;
 	}
 
-	public User(Long id, String firstname, String username, String password, String lastname, Long phonenumber,
-			Set<Roles> roles) {
+	public User(Long id, String firstname, String username, String password, String lastname, Long phonenumber) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -63,7 +64,6 @@ public class User {
 		this.password = password;
 		this.lastname = lastname;
 		this.phonenumber = phonenumber;
-		this.roles = roles;
 	}
 
 	/**
@@ -137,13 +137,14 @@ public class User {
 		this.phonenumber = phonenumber;
 	}
 
-	@ManyToMany
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	public Set<Roles> getRoles() {
-		return roles;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	//@JsonIgnore
+	public List<UserRole> getUserRoles() {
+		return userRoles;
 	}
 
-	public void setRoles(Set<Roles> roles) {
-		this.roles = roles;
+	public void setUserRoles(List<UserRole> userRoles) {
+		this.userRoles = userRoles;
 	}
+
 }

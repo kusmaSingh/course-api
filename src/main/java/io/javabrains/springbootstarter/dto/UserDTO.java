@@ -20,18 +20,29 @@ import io.javabrains.springbootstarter.entity.Roles;
  * 12-Jan-2018
  */
 public class UserDTO {
+	
+
 	private Long id;
 	private String firstname;
-	private String username;
-	private String password;
 	private String lastname;
+	private String username;
 	private Long phonenumber;
+	private String password;
+	
 
 	private Set<Roles> roles;
 
 	/*Default Constructor*/
 	public UserDTO() {
 		super();
+	}
+	public UserDTO(Long id, String firstname, String lastname, String username, Long phonenumber) {
+		super();
+		this.id = id;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.username = username;
+		this.phonenumber = phonenumber;
 	}
 
 	/**

@@ -5,18 +5,22 @@ package io.javabrains.springbootstarter.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import io.javabarins.sprinbootstarter.security.jwt.model.UserContext;
 import io.javabrains.springbootstarter.dto.CustomStatusCode;
 import io.javabrains.springbootstarter.dto.ResponseDTO;
 import io.javabrains.springbootstarter.dto.UserDTO;
 import io.javabrains.springbootstarter.entity.User;
 import io.javabrains.springbootstarter.repository.UserRepository;
 import io.javabrains.springbootstarter.service.UserService;
+import io.javabrains.springbootstrater.util.ToolBoxUtil;
 
 /**
  * @author Kusma
@@ -32,8 +36,7 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public ResponseDTO registration(@RequestBody User user) {
@@ -52,7 +55,8 @@ public class UserController {
 				new UserDTO(user.getUsername(), user.getId()), CustomStatusCode.hTTPStatusMessage.SUCCESS.getValue());
 	}
 
-	/*@RequestMapping(value = "/login", method = RequestMethod.POST)
+	/*This is for without jwt implementation login
+	 * @RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseDTO login(@RequestBody UserDTO userDto) {
 		boolean isPasswordMatch = false;
 		User user = userService.findByUsername(userDto.getUsername());
@@ -75,9 +79,9 @@ public class UserController {
 
 	}
 */
-	@RequestMapping(value = "/findOne", method = RequestMethod.GET)
-	public String login() {
-		System.out.println("Test");
-		return "KUSMA";
-	}
+	
+	 @RequestMapping(value = "/username", method = RequestMethod.GET)
+	    public String currentUserName(Authentication authentication) {
+	        return authentication.getName();
+	    }
 }

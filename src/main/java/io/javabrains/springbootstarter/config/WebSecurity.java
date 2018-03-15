@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package io.javabrains.springbootstarter.config;
 
 import java.util.Arrays;
@@ -20,12 +18,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 
 import io.javabrains.springbootstarter.auth.jwt.JwtAuthenticationProvider;
 import io.javabrains.springbootstarter.auth.jwt.JwtTokenAuthenticationProcessingFilter;
@@ -44,25 +39,23 @@ import io.javabrains.springbootstarter.security.auth.ajax.RestAuthenticationEntr
  */
 @Configuration
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurity extends WebSecurityConfigurerAdapter {
-
 	private static final Logger logger = LoggerFactory.getLogger(WebSecurity.class);
 	public static final String JWT_TOKEN_HEADER_PARAM = "X-Authorization";
-	public static final String FORM_BASED_LOGIN_ENTRY_POINT = "api/auth/login";
+	public static final String FORM_BASED_LOGIN_ENTRY_POINT = "/api/auth/login";
 	public static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/api/**";
 	public static final String TOKEN_REFRESH_ENTRY_POINT = "/api/auth/token";
+	
 	public static final String FORM_BASED_REGISTRATION_ENTRY_POINT = "/api/auth/registration";
 
-	private static final String[] BY_PASS_SECURITY_PERMITALL_URLS = { "/", "/resources/**",
-			FORM_BASED_REGISTRATION_ENTRY_POINT, FORM_BASED_LOGIN_ENTRY_POINT, TOKEN_REFRESH_ENTRY_POINT };
-
+	private static final String[] BY_PASS_SECURITY_PERMITALL_URLS = { "/","/resources/**", FORM_BASED_REGISTRATION_ENTRY_POINT,FORM_BASED_LOGIN_ENTRY_POINT,TOKEN_REFRESH_ENTRY_POINT};
 	@Autowired
 	private RestAuthenticationEntryPoint authenticationEntryPoint;
-
+	
 	@Autowired
 	private AjaxAuthenticationProvider ajaxAuthenticationProvider;
-
+	
 	@Autowired
 	private JwtAuthenticationProvider jwtAuthenticationProvider;
 
@@ -74,27 +67,29 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private ObjectMapper objectMapper;
-
+	
+	
 	@Autowired
 	private AjaxAwareAuthenticationFailureHandler ajaxAwareAuthenticationFailureHandler;
-
+	
 	@Autowired
 	private AjaxAwareAuthenticationSuccessHandler ajaxAwareAuthenticationSuccessHandler;
 
+	@Autowired
+	private Environment env;
 	
-
 	protected AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter() throws Exception {
-		AjaxLoginProcessingFilter filter = new AjaxLoginProcessingFilter(FORM_BASED_LOGIN_ENTRY_POINT,
-				ajaxAwareAuthenticationSuccessHandler, ajaxAwareAuthenticationFailureHandler, objectMapper);
+		AjaxLoginProcessingFilter filter = new AjaxLoginProcessingFilter(FORM_BASED_LOGIN_ENTRY_POINT, ajaxAwareAuthenticationSuccessHandler,
+				ajaxAwareAuthenticationFailureHandler, objectMapper);
 		filter.setAuthenticationManager(this.authenticationManager);
 		return filter;
 	}
 
 	protected JwtTokenAuthenticationProcessingFilter buildJwtTokenAuthenticationProcessingFilter() throws Exception {
-		List<String> pathsToSkip = Arrays.asList(FORM_BASED_LOGIN_ENTRY_POINT, TOKEN_REFRESH_ENTRY_POINT);
+		List<String> pathsToSkip = Arrays.asList(FORM_BASED_LOGIN_ENTRY_POINT,TOKEN_REFRESH_ENTRY_POINT);
 		SkipPathRequestMatcher matcher = new SkipPathRequestMatcher(pathsToSkip, TOKEN_BASED_AUTH_ENTRY_POINT);
-		JwtTokenAuthenticationProcessingFilter filter = new JwtTokenAuthenticationProcessingFilter(
-				ajaxAwareAuthenticationFailureHandler, tokenExtractor, matcher);
+		JwtTokenAuthenticationProcessingFilter filter = new JwtTokenAuthenticationProcessingFilter(ajaxAwareAuthenticationFailureHandler,
+				tokenExtractor, matcher);
 		filter.setAuthenticationManager(this.authenticationManager);
 		return filter;
 	}
@@ -102,47 +97,47 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
+ 		return super.authenticationManagerBean();
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) {
 		auth.authenticationProvider(ajaxAuthenticationProvider);
-		auth.authenticationProvider(jwtAuthenticationProvider);
+		auth.authenticationProvider(jwtAuthenticationProvider);                                    
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable().authorizeRequests().antMatchers(BY_PASS_SECURITY_PERMITALL_URLS).permitAll()
-				.antMatchers(TOKEN_REFRESH_ENTRY_POINT).permitAll().and().exceptionHandling()
-				.authenticationEntryPoint(this.authenticationEntryPoint)
+		http.cors().and().csrf().disable() 
+		// We don't need CSRF for JWT based authentication
+				.authorizeRequests().antMatchers(BY_PASS_SECURITY_PERMITALL_URLS).permitAll().antMatchers(TOKEN_REFRESH_ENTRY_POINT).permitAll().and()
+				.exceptionHandling().authenticationEntryPoint(this.authenticationEntryPoint)
 
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-				.and().authorizeRequests().antMatchers(TOKEN_BASED_AUTH_ENTRY_POINT).authenticated() // Protected
-																										// API
+				//.and().authorizeRequests().antMatchers(BY_PASS_SECURITY_PERMITALL_URLS).permitAll() // Login end-point
+				//.antMatchers(TOKEN_REFRESH_ENTRY_POINT).permitAll() // Token refresh end-point
+				
+				.and().authorizeRequests().antMatchers(TOKEN_BASED_AUTH_ENTRY_POINT).authenticated() // Protected API
 																										// End-points
-				.and().addFilterBefore(buildAjaxLoginProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
-				.addFilterBefore(buildJwtTokenAuthenticationProcessingFilter(),
-						UsernamePasswordAuthenticationFilter.class);
+				.and()
+				//.addFilterBefore(new CustomCorsFilter(), UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(buildAjaxLoginProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(buildJwtTokenAuthenticationProcessingFilter(),UsernamePasswordAuthenticationFilter.class)
+				;
 	}
 	
-
-/*	@Bean
-	public HazelcastInstance hazelCast() {
-		Config config = new Config();
-		config.setInstanceName("course-hazelcast");
-		NetworkConfig networkConfig = new NetworkConfig().setPort(5701).setPortAutoIncrement(false);
-		networkConfig.setJoin(new JoinConfig().setMulticastConfig(new MulticastConfig().setEnabled(false)));
-		config.setNetworkConfig(networkConfig);
-		config.addMapConfig(new MapConfig().setName("blacklistToken"));
-		return Hazelcast.newHazelcastInstance(config);
-		
-		 * config.setInstanceName("blacklistToken");
-		 * System.out.println("hazel cast ::::::: "+config.getInstanceName());
-		 * return Hazelcast.newHazelcastInstance(config);
-		 
-	}*/
-
+	/**
+	 * Service interface for encoding passwords. The preferred implementation is
+	 * BCryptPasswordEncoder.
+	 * 
+	 * @return
+	 */
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		logger.info("PasswordEncoder bean successfully initiated ");
+		return new BCryptPasswordEncoder();
+	}
+	
 	
 }

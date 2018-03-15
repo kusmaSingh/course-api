@@ -35,31 +35,31 @@ import io.javabrains.springbootstarter.jwt.extracter.JwtToken;
 @Component
 public class AjaxAwareAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 	private final ObjectMapper mapper;
-	private final JwtTokenFactory jwtTokenFactory;
+    private final JwtTokenFactory tokenFactory;
 
-	@Autowired
-	public AjaxAwareAuthenticationSuccessHandler(final ObjectMapper mapper, final JwtTokenFactory tokenFactory) {
-		super();
-		this.mapper = mapper;
-		this.jwtTokenFactory = tokenFactory;
-	}
+    @Autowired
+    public AjaxAwareAuthenticationSuccessHandler(final ObjectMapper mapper, final JwtTokenFactory tokenFactory) {
+        this.mapper = mapper;
+        this.tokenFactory = tokenFactory;
+    }
+    
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		UserContext userContext = (UserContext) authentication.getPrincipal();
 
-		JwtToken accessToken = jwtTokenFactory.createAccessJwtToken(userContext);
-		JwtToken refreshToken = jwtTokenFactory.createRefreshToken(userContext);
-
+		JwtToken accessToken = tokenFactory.createAccessJwtToken(userContext);
+		JwtToken refreshToken = tokenFactory.createRefreshToken(userContext);
 		Map<String, String> tokenMap = new HashMap<String, String>();
 		tokenMap.put("token", accessToken.getToken());
 		tokenMap.put("refreshToken", refreshToken.getToken());
-
+		
 		response.setStatus(HttpStatus.OK.value());
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 		mapper.writeValue(response.getWriter(), tokenMap);
-
+		System.out.println("TokenMap  =====>  "+ tokenMap);
+		
 		clearAuthenticationAttributes(request);
 	}
 

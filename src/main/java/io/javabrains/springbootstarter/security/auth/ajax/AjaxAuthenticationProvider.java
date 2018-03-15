@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import io.javabarins.sprinbootstarter.security.jwt.model.UserContext;
-import io.javabrains.springbootstarter.entity.Roles;
+import io.javabrains.springbootstarter.dto.RoleDTO;
 import io.javabrains.springbootstarter.entity.User;
 import io.javabrains.springbootstarter.service.UserService;
 
@@ -47,7 +47,7 @@ public class AjaxAuthenticationProvider implements AuthenticationProvider {
 		if (user == null || !encoder.matches(password, user.getPassword())) {
 			throw new BadCredentialsException("Authentication Failed. Username or Password not valid.");
 		}
-		List<Roles> roles = userService.findRoleByUserId(user.getId());
+		List<RoleDTO> roles = userService.findRoleByUserId(user.getId());
 
 		List<GrantedAuthority> authorities = roles.stream()
 				.map(authority -> new SimpleGrantedAuthority(authority.getName())).collect(Collectors.toList());

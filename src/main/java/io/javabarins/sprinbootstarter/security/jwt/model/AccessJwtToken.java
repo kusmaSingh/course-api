@@ -19,11 +19,12 @@ public final class AccessJwtToken implements JwtToken {
 	public AccessJwtToken(String rawToken, Claims claims) {
 		this.rawToken = rawToken;
 		this.claims = claims;
+		
 	}
 
 	
 	public String getToken() {
-		return null;
+		return this.rawToken;
 	}
 	
 	public Claims getClaims() {

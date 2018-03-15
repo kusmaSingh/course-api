@@ -5,7 +5,8 @@ package io.javabrains.springbootstarter.service;
 
 import java.util.List;
 
-import io.javabrains.springbootstarter.entity.Roles;
+import io.javabrains.springbootstarter.dto.RoleDTO;
+import io.javabrains.springbootstarter.dto.UserDTO;
 import io.javabrains.springbootstarter.entity.User;
 
 /**
@@ -19,8 +20,13 @@ public interface UserService {
 
 	public User findByUsername(String username);
 	public User LoginUser(User user);
-
-	List<Roles> findRoleByUserId(Long id);
+	/**
+	 * This function is return information of DTO from User entity.
+	 * @param email
+	 * @return
+	 */
+	public UserDTO findOne(String username);
+	List<RoleDTO> findRoleByUserId(Long id);
 
 
 }

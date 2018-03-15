@@ -16,6 +16,8 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
+
+
 import io.javabarins.sprinbootstarter.security.jwt.model.RawAccessJwtToken;
 import io.javabrains.springbootstarter.config.WebSecurity;
 
@@ -25,43 +27,41 @@ import io.javabrains.springbootstarter.config.WebSecurity;
  * @date 06-Feb-2018
  */
 public class JwtTokenAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
+    private final AuthenticationFailureHandler failureHandler;
+    private final TokenExtractor tokenExtractor;
+    
+    @Autowired
+    public JwtTokenAuthenticationProcessingFilter(AuthenticationFailureHandler failureHandler, 
+            TokenExtractor tokenExtractor, RequestMatcher matcher) {
+        super(matcher);
+        this.failureHandler = failureHandler;
+        this.tokenExtractor = tokenExtractor;
+    }
 
-	private final AuthenticationFailureHandler failureHandler;
-	private final TokenExtractor tokenExtractor;
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+            throws AuthenticationException, IOException, ServletException {
+    	String tokenPayload = request.getHeader(WebSecurity.JWT_TOKEN_HEADER_PARAM);
+        if(tokenPayload == null && !request.getParameter(WebSecurity.JWT_TOKEN_HEADER_PARAM).isEmpty())
+        	tokenPayload = request.getParameter(WebSecurity.JWT_TOKEN_HEADER_PARAM);
+        
+        RawAccessJwtToken token = new RawAccessJwtToken(tokenExtractor.extract(tokenPayload));
+        return getAuthenticationManager().authenticate(new JwtAuthenticationToken(token));
+    }
 
-	@Autowired
-	public JwtTokenAuthenticationProcessingFilter(AuthenticationFailureHandler failureHandler,
-			TokenExtractor tokenExtractor, RequestMatcher matcher) {
-		super(matcher);
-		this.failureHandler = failureHandler;
-		this.tokenExtractor = tokenExtractor;
-	}
+    @Override
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
+            Authentication authResult) throws IOException, ServletException {
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        context.setAuthentication(authResult);
+        SecurityContextHolder.setContext(context);
+        chain.doFilter(request, response);
+    }
 
-	@Override
-	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
-			throws AuthenticationException, IOException, ServletException {
-
-		String tokenPayload = request.getHeader(WebSecurity.JWT_TOKEN_HEADER_PARAM);
-		/*if (tokenPayload == null && !request.getParameter(WebSecurity.JWT_TOKEN_HEADER_PARAM).isEmpty())
-			tokenPayload = request.getParameter(WebSecurity.JWT_TOKEN_HEADER_PARAM);
-*/
-		RawAccessJwtToken token = new RawAccessJwtToken(tokenExtractor.extract(tokenPayload));
-		return getAuthenticationManager().authenticate(new JwtAuthenticationToken(token));
-	}
-
-	@Override
-	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-			Authentication authResult) throws IOException, ServletException {
-		SecurityContext context = SecurityContextHolder.createEmptyContext();
-		context.setAuthentication(authResult);
-		SecurityContextHolder.setContext(context);
-		chain.doFilter(request, response);
-	}
-
-	@Override
-	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
-			AuthenticationException failed) throws IOException, ServletException {
-		SecurityContextHolder.clearContext();
-		failureHandler.onAuthenticationFailure(request, response, failed);
-	}
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+            AuthenticationException failed) throws IOException, ServletException {
+        SecurityContextHolder.clearContext();
+        failureHandler.onAuthenticationFailure(request, response, failed);
+    }
 }

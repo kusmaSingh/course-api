@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * 15-Jan-2018
  */
 @Configuration
-@ConfigurationProperties(prefix = "course-api.security.jwt")
+@ConfigurationProperties(prefix = "course_api.security.jwt")
 
 public class JwtSetting {
 	 /**
